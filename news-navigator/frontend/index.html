@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>News Navigator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="app">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">News<span>Navigator</span></div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <svg width="14" height="14" fill="none" viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" stroke="#a09f9a" stroke-width="1.5"/><path d="M11 11l3 3" stroke="#a09f9a" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" placeholder="Search live news…" autocomplete="off" oninput="onSearch(this.value)"/>
+      </div>
+      <select class="lang-select" id="langSelect" onchange="onLangChange(this.value)" title="Language">
+        <option value="en">🌐 English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="ar">العربية</option>
+        <option value="zh">中文</option>
+      </select>
+      <div class="date" id="dateLabel"></div>
+    </div>
+  </header>
+<div class="feature-bar">
+  <button class="feature-btn active" onclick="setFeature('news')">News</button>
+  <button class="feature-btn" onclick="setFeature('briefing')">AI News Briefing</button>
+  <button class="feature-btn" onclick="setFeature('timeline')">Story Timeline</button>
+  <button class="feature-btn" onclick="setFeature('kids')">Kids Corner</button>
+  <button class="feature-btn" onclick="setFeature('ask')">Ask Analyst</button>
+</div>
+
+  <!-- Categories -->
+  <nav class="cats">
+    <div class="cat active" onclick="setCategory('general',this)">Top Stories</div>
+    <div class="cat" onclick="setCategory('world',this)">World</div>
+    <div class="cat" onclick="setCategory('tech',this)">Technology</div>
+    <div class="cat" onclick="setCategory('business',this)">Business</div>
+    <div class="cat" onclick="setCategory('science',this)">Science</div>
+    <div class="cat" onclick="setCategory('health',this)">Health</div>
+    <div class="cat" onclick="setCategory('sports',this)">Sports</div>
+    <div class="cat" onclick="setCategory('entertainment',this)">Entertainment</div>
+  </nav>
+
+  <!-- Main layout -->
+  <div class="layout">
+
+    <!-- Feed / Detail -->
+    <main>
+      <div class="feature-widget" id="featureWidget"></div>
+      <div class="feed" id="feed"></div>
+
+      <!-- Article detail panel -->
+      <div class="detail" id="detail">
+        <div class="back-btn" onclick="closeDetail()">
+          <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to headlines
+        </div>
+        <div id="detailContent"></div>
+      </div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="side-title">Trending now</div>
+        <div id="trending"><div class="loading"><div class="spinner"></div></div></div>
+      </div>
+      <div id="askPanel" class="ask-panel hidden">
+        <div class="side-title">Ask Analyst</div>
+        <textarea id="askInput" placeholder="Ask about world news, tech, or trends..." rows="3"></textarea>
+        <button class="btn" onclick="submitAnalystQuestion()">Ask Analyst</button>
+        <div id="askResult" class="ask-result"></div>
+      </div>
+      <div>
+        <div class="side-title">Weather</div>
+        <div id="weather"><div class="loading"><div class="spinner"></div></div></div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
